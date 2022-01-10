@@ -328,8 +328,9 @@ module.exports = {
 
   // PROVIDER
 
-  'Should switch to hardhat provider (provider plugin)': async function (browser: NightwatchBrowser) {
+  'Should switch to hardhat provider (provider plugin) #group8': function (browser: NightwatchBrowser) {
     browser
+      .waitForElementNotVisible('#icon-panel div[plugin="udapp"]')
       .clickLaunchIcon('udapp')
       .click('*[data-id="Hardhat provider"]')
       .modalFooterOKClick('hardhatprovider')
@@ -337,6 +338,7 @@ module.exports = {
       .getValue('*[data-id="settingsNetworkEnv"]', (result) => {
         browser.assert.ok((result.value as string).match(/^Custom \(\d+\) network$/) !== undefined, 'Expected to ')
       })
+      .useXpath()
       .perform(async () => {
         const request = {
           id: 9999,
